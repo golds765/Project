@@ -34,7 +34,7 @@
 <body>
 
     <div id="question-container">
-        <h1>Will you be my Valentine? ❤️</h1>
+        <h1>Matthew will you be my Valentine? ❤️</h1>
         <div class="buttons">
             <button id="yesBtn" onclick="showLove()">Yes</button>
             <button id="noBtn" onmouseover="moveButton()">No</button>
@@ -76,8 +76,9 @@
             yesBtn.style.transform = `scale(${yesScale})`;
             
             noClicks++;
+            if (noClicks > 3) yesBtn.innerHTML = "so you hate me 😞";
             if (noClicks > 5) yesBtn.innerHTML = "JUST SAY YES 🥹";
-            if (noClicks > 12) yesBtn.innerHTML = "I'M GETTING BIGGER";
+            if (noClicks > 12) yesBtn.innerHTML = "BROTHA PLEASE ";
         }
 
         function showLove() {
