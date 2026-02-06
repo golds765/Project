@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Special Question</title>
+    <title>A Very Important Question</title>
     <style>
         body {
             display: flex;
@@ -14,21 +14,21 @@
             margin: 0;
             background-color: #ffe6e6;
             font-family: 'Arial', sans-serif;
-            text-align: center;
+            overflow: hidden; /* Prevents scrollbars if the No button goes off-edge */
         }
-        h1 { color: #ff4d6d; font-size: 3rem; }
-        .buttons { margin-top: 20px; position: relative; width: 300px; height: 100px; }
+        h1 { color: #ff4d6d; font-size: 2.5rem; margin-bottom: 30px; }
+        .buttons { display: flex; align-items: center; justify-content: center; gap: 20px; }
         button {
             padding: 15px 30px;
             font-size: 1.2rem;
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.2s ease;
         }
-        #yesBtn { background-color: #ff4d6d; color: white; margin-right: 10px; }
+        #yesBtn { background-color: #ff4d6d; color: white; z-index: 10; }
         #noBtn { background-color: #adb5bd; color: white; position: absolute; }
-        .celebration { display: none; }
+        .celebration { display: none; text-align: center; }
     </style>
 </head>
 <body>
@@ -42,19 +42,36 @@
     </div>
 
     <div id="celebration" class="celebration">
-        <h1>Yay! See you on the 14th! 🥰✨</h1>
+        <h1>I knew you'd say yes! 🥰✨</h1>
         <img src="https://media.tenor.com/Ao9O4SGI-cQAAAAM/sleep-cat-two-cat.gif">
     </div>
 
     <script>
+        let yesScale = 1;
+        let noClicks = 0;
+
         function moveButton() {
-            const btn = document.getElementById('noBtn');
-            // Calculate random positions within the viewport
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            const noBtn = document.getElementById('noBtn');
+            const yesBtn = document.getElementById('yesBtn');
+
+            // 1. Move the No button
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+
+            // 2. Make the Yes button bigger
+            yesScale += 0.15; // Increases size by 15% each time
+            yesBtn.style.transform = `scale(${yesScale})`;
             
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
+            // 3. Optional: Make the Yes button text more aggressive
+            noClicks++;
+            if (noClicks > 5) {
+                yesBtn.innerHTML = "JUST SAY YES ❤️";
+            }
+            if (noClicks > 10) {
+                yesBtn.innerHTML = "CLICK ME ALREADY";
+            }
         }
 
         function showLove() {
